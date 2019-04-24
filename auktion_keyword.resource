@@ -88,6 +88,7 @@ Gather Data
     # Create a new "vars.txt" file where the next round to collect is stored
     create file             ${CURDIR}/vars.txt            *** Variables ***\n\${StartRound}${SPACE * 4}${NextGatherRound}
     log to console          \nNext round to gather stored: ${NextGatherRound}\n
+    log to console          ${CURDIR}
 
     # Update zip-file with all new screenshots and delete the screenshot files
     run                     zip -u ./Output/AllScreenshots.zip ./Output/Screenshot*
