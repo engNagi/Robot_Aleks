@@ -91,11 +91,11 @@ Gather Data
     log to console          ${CURDIR}
 
     # Update zip-file with all new screenshots and delete the screenshot files
-    run                     zip -u ./Output/AllScreenshots.zip ./Output/Screenshot*
-    run                     rm ./Output/Screenshot*
+    run                     zip -u ${CURDIR}/Output/AllScreenshots.zip ${CURDIR}/Output/Screenshot*
+    run                     rm ${CURDIR}/Output/Screenshot*
 
     # Create a zip-file with both csv data files and the screenshot archive
-    run                     zip ./Output/Round${Max_Round_int}.zip data_2GHz.txt data_36GHz.txt ./Output/AllScreenshots.zip
+    run                     zip ${CURDIR}/Output/Round${Max_Round_int}.zip data_2GHz.txt data_36GHz.txt ${CURDIR}/Output/AllScreenshots.zip
 
     # Store endtime and calcute the runtime. Log the runtime to the console
     ${ENDTIME}=             get time
@@ -165,4 +165,4 @@ Screenshot
     [Arguments]                 ${screenshotname}
 
     # Take a screenshot with the passed name
-    capture page screenshot     ./Output/${screenshotname}
+    capture page screenshot     ${CURDIR}/Output/${screenshotname}
