@@ -23,7 +23,7 @@ pipeline {
                             logFileName: 'log.html',
                             otherFiles: '',
                             outputFileName: 'output.xml',
-                            outputPath: './output/',
+                            outputPath: './Output/',
                             passThreshold: 100,
                             reportFileName: 'report.html',
                             unstableThreshold: 0]);
