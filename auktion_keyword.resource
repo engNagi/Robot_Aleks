@@ -166,4 +166,3 @@ Screenshot
 
     # Take a screenshot with the passed name
     capture page screenshot     ./Output/${screenshotname}
-    
