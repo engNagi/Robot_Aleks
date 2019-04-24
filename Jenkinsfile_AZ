@@ -7,11 +7,11 @@ pipeline {
             steps
             {
                 sh 'pwd'
-                sh 'cd /home/azoszak/.jenkins/workspace/Robot_Frame_Work/venv/bin'
+                sh 'cd $HOME/.jenkins/workspace/Robot_Frame_Work/venv/bin'
                 sh 'pwd'
                 sh 'echo make output Dir'
                 sh 'mkdir -p $WORKSPACE/Output'
-                sh 'robot -d ./output/ /home/azoszak/.jenkins/workspace/Robot_Frame_Work/auktion.robot'
+                sh 'robot -d ./output/ $HOME/.jenkins/workspace/Robot_Frame_Work_Pipeline/auktion.robot'
             }
         }
         stage('Publish Robot-Test Results')
