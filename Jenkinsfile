@@ -7,11 +7,11 @@ pipeline {
             steps
             {
                 sh 'pwd'
-                sh 'cd /Users/mohamednagi/.jenkins/workspace/Robot_Frame_Work/venv/bin'
+                sh 'cd $HOME/.jenkins/workspace/Robot_Frame_Work/venv/bin'
                 sh 'pwd'
                 sh 'echo make output Dir'
                 sh 'mkdir -p $WORKSPACE/Output'
-                sh 'robot -d ./output/ /Users/mohamednagi/.jenkins/workspace/Robot_Frame_Work/auktion.robot'
+                sh '$HOME/.jenkins/workspace/Robot_Frame_Work/venv/bin/./python -m robot -d ./Output/ $HOME/.jenkins/workspace/Robot_Frame_Work/auktion.robot'
             }
         }
         stage('Publish Robot-Test Results')
@@ -23,7 +23,7 @@ pipeline {
                             logFileName: 'log.html',
                             otherFiles: '',
                             outputFileName: 'output.xml',
-                            outputPath: './output/',
+                            outputPath: './Output/',
                             passThreshold: 100,
                             reportFileName: 'report.html',
                             unstableThreshold: 0]);
