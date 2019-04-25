@@ -59,6 +59,7 @@ Get ammount of Rounds
 
 
 Gather Data
+    Check existence of vars.txt
     ${Max_Round_int}=       convert to integer  ${Max_Round}
     ${NextGatherRound}=     set variable        ${Max_Round_int+1}
     ${j_int}=               convert to integer  ${StartRound}
