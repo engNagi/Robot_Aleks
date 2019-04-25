@@ -34,6 +34,16 @@ Open Browser
     set window size         ${WINDOW_X}         ${WINDOW_Y}
 
 
+Check existence of vars.txt
+    # Check the existence of vars.txt file. Status will get the value "FAIL" if file doesn't exist
+    ${status}  ${message}=  Run Keyword And Ignore Error   Variable Should Exist  ${StartRound}
+
+    # If file doesn't exist create it and set the "StartRound" manually to the value "1"
+    Run Keyword If          "${status}" == "FAIL"   run keywords
+    ...                     create file             ${CURDIR}${/}vars.txt   *** Variables ***\n\${StartRound}${SPACE * 4}1
+    ...     AND             set global variable     ${StartRound}           1
+
+
 Navigate To Main Webpage
     # Navigate to the main webpage and verify it
     Go To                   ${URLMAIN}
@@ -85,17 +95,16 @@ Gather Data
     # Increment the current round value by one
     \   ${j}                set variable        ${j+1}
 
-    # Create a new "vars.txt" file where the next round to collect is stored
-    create file             ${CURDIR}/vars.txt            *** Variables ***\n\${StartRound}${SPACE * 4}${NextGatherRound}
+    # Create a new "vars.txt" file where the test data file is located to store the next round
+    create file             ${CURDIR}${/}vars.txt       *** Variables ***\n\${StartRound}${SPACE * 4}${NextGatherRound}
     log to console          \nNext round to gather stored: ${NextGatherRound}\n
-    log to console          ${CURDIR}
 
     # Update zip-file with all new screenshots and delete the screenshot files
-    run                     zip -u ${CURDIR}/Output/AllScreenshots.zip ${CURDIR}/Output/Screenshot*
-    run                     rm ${CURDIR}/Output/Screenshot*
+    run                     zip -u ${CURDIR}${/}Output${/}AllScreenshots.zip ./Output${/}Screenshot*
+    run                     rm ${CURDIR}${/}Output${/}Screenshot*
 
     # Create a zip-file with both csv data files and the screenshot archive
-    run                     zip ${CURDIR}/Output/Round${Max_Round_int}.zip data_2GHz.txt data_36GHz.txt ${CURDIR}/Output/AllScreenshots.zip
+    run                     zip ${CURDIR}${/}Output${/}Round${Max_Round_int}.zip data_2GHz.txt data_36GHz.txt ./Output/AllScreenshots.zip
 
     # Store endtime and calcute the runtime. Log the runtime to the console
     ${ENDTIME}=             get time
@@ -165,4 +174,4 @@ Screenshot
     [Arguments]                 ${screenshotname}
 
     # Take a screenshot with the passed name
-    capture page screenshot     ${CURDIR}/Output/${screenshotname}
+    capture page screenshot     ${CURDIR}${/}Output${/}${screenshotname}
